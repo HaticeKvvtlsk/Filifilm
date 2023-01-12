@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceLibrary1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceLibrary1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfFilmler">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Filmler" nillable="true" type="tns:Filmler" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFilmler" nillable="true" type="tns:ArrayOfFilmler" />
+  <xs:complexType name="Filmler">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Aciklama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilmAdi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilmID" type="xs:int" />
+      <xs:element minOccurs="0" name="FilmResmi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDeleted" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VizyonTarihi" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="YapimYili" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Filmler" nillable="true" type="tns:Filmler" />
+</xs:schema>

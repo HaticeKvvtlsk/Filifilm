@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae2ac39540be4911883ae05c94027774" Name="Diagram1">
+        <EntityTypeShape EntityType="FiliFilmModel.Cast" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Cinsiyet" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Dil" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Filmler" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Giris" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Oyuncular" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Tur" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Ulke" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FiliFilmModel.Yonetmen" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="FiliFilmModel.FK__Cast__FilmID__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Cast__OyuncuID__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Oyuncular__Cinsi__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Yonetmen__Cinsiy__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Filmler__DilID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Filmler__FilmTur__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Filmler__UlkeID__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Filmler__Yonetme__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="FiliFilmModel.FK__Oyuncular__UlkeI__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

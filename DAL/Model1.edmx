@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FiliFilmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cast">
+          <Key>
+            <PropertyRef Name="CastID" />
+          </Key>
+          <Property Name="CastID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="OyuncuID" Type="int" />
+          <Property Name="CastKarakterName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="CinsiyetID" />
+          </Key>
+          <Property Name="CinsiyetID" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Cinsiyet" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Dil">
+          <Key>
+            <PropertyRef Name="DilID" />
+          </Key>
+          <Property Name="DilID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dil" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Filmler">
+          <Key>
+            <PropertyRef Name="FilmID" />
+          </Key>
+          <Property Name="FilmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="FilmTurID" Type="int" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VizyonTarihi" Type="date" />
+          <Property Name="YapimYili" Type="int" />
+          <Property Name="YonetmenID" Type="int" />
+          <Property Name="DilID" Type="int" />
+          <Property Name="UlkeID" Type="int" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="150" />
+          <Property Name="Link" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Giris">
+          <Key>
+            <PropertyRef Name="GirisID" />
+          </Key>
+          <Property Name="GirisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Oyuncular">
+          <Key>
+            <PropertyRef Name="OyuncuID" />
+          </Key>
+          <Property Name="OyuncuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UlkeID" Type="int" />
+          <Property Name="CinsiyetID" Type="char" MaxLength="1" />
+          <Property Name="OyuncuAdiSoyadi" Type="nvarchar" MaxLength="200" />
+          <Property Name="DogumTarihi" Type="date" />
+        </EntityType>
+        <EntityType Name="Tur">
+          <Key>
+            <PropertyRef Name="TurID" />
+          </Key>
+          <Property Name="TurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tur" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="UlkeID" />
+          </Key>
+          <Property Name="UlkeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ulke" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Yonetmen">
+          <Key>
+            <PropertyRef Name="YonetmenID" />
+          </Key>
+          <Property Name="YonetmenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdiSoyadi" Type="nvarchar" MaxLength="250" />
+          <Property Name="CinsiyetID" Type="char" MaxLength="1" />
+          <Property Name="DogumTarihi" Type="date" />
+        </EntityType>
+        <Association Name="FK__Cast__FilmID__4CA06362">
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="0..1" />
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmler">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cast__OyuncuID__4D94879B">
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="0..1" />
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oyuncular">
+              <PropertyRef Name="OyuncuID" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="OyuncuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__DilID__48CFD27E">
+          <End Role="Dil" Type="Self.Dil" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dil">
+              <PropertyRef Name="DilID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="DilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__FilmTur__46E78A0C">
+          <End Role="Tur" Type="Self.Tur" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tur">
+              <PropertyRef Name="TurID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="FilmTurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__UlkeID__49C3F6B7">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="UlkeID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="UlkeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__Yonetme__47DBAE45">
+          <End Role="Yonetmen" Type="Self.Yonetmen" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetmen">
+              <PropertyRef Name="YonetmenID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="YonetmenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oyuncular__Cinsi__412EB0B6">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Oyuncular">
+              <PropertyRef Name="CinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oyuncular__UlkeI__403A8C7D">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="0..1" />
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="UlkeID" />
+            </Principal>
+            <Dependent Role="Oyuncular">
+              <PropertyRef Name="UlkeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Yonetmen__Cinsiy__440B1D61">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Yonetmen" Type="Self.Yonetmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Yonetmen">
+              <PropertyRef Name="CinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FiliFilmModelStoreContainer">
+          <EntitySet Name="Cast" EntityType="Self.Cast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dil" EntityType="Self.Dil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filmler" EntityType="Self.Filmler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Giris" EntityType="Self.Giris" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oyuncular" EntityType="Self.Oyuncular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tur" EntityType="Self.Tur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ulke" EntityType="Self.Ulke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yonetmen" EntityType="Self.Yonetmen" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cast__FilmID__4CA06362" Association="Self.FK__Cast__FilmID__4CA06362">
+            <End Role="Filmler" EntitySet="Filmler" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cast__OyuncuID__4D94879B" Association="Self.FK__Cast__OyuncuID__4D94879B">
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__DilID__48CFD27E" Association="Self.FK__Filmler__DilID__48CFD27E">
+            <End Role="Dil" EntitySet="Dil" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__FilmTur__46E78A0C" Association="Self.FK__Filmler__FilmTur__46E78A0C">
+            <End Role="Tur" EntitySet="Tur" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__UlkeID__49C3F6B7" Association="Self.FK__Filmler__UlkeID__49C3F6B7">
+            <End Role="Ulke" EntitySet="Ulke" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__Yonetme__47DBAE45" Association="Self.FK__Filmler__Yonetme__47DBAE45">
+            <End Role="Yonetmen" EntitySet="Yonetmen" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oyuncular__Cinsi__412EB0B6" Association="Self.FK__Oyuncular__Cinsi__412EB0B6">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oyuncular__UlkeI__403A8C7D" Association="Self.FK__Oyuncular__UlkeI__403A8C7D">
+            <End Role="Ulke" EntitySet="Ulke" />
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Yonetmen__Cinsiy__440B1D61" Association="Self.FK__Yonetmen__Cinsiy__440B1D61">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Yonetmen" EntitySet="Yonetmen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FiliFilmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cast">
+          <Key>
+            <PropertyRef Name="CastID" />
+          </Key>
+          <Property Name="CastID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="OyuncuID" Type="Int32" />
+          <Property Name="CastKarakterName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Filmler" Relationship="Self.FK__Cast__FilmID__4CA06362" FromRole="Cast" ToRole="Filmler" />
+          <NavigationProperty Name="Oyuncular" Relationship="Self.FK__Cast__OyuncuID__4D94879B" FromRole="Cast" ToRole="Oyuncular" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="CinsiyetID" />
+          </Key>
+          <Property Name="CinsiyetID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cinsiyet1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oyuncular" Relationship="Self.FK__Oyuncular__Cinsi__412EB0B6" FromRole="Cinsiyet" ToRole="Oyuncular" />
+          <NavigationProperty Name="Yonetmen" Relationship="Self.FK__Yonetmen__Cinsiy__440B1D61" FromRole="Cinsiyet" ToRole="Yonetmen" />
+        </EntityType>
+        <EntityType Name="Dil">
+          <Key>
+            <PropertyRef Name="DilID" />
+          </Key>
+          <Property Name="DilID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dil1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Filmler" Relationship="Self.FK__Filmler__DilID__48CFD27E" FromRole="Dil" ToRole="Filmler" />
+        </EntityType>
+        <EntityType Name="Filmler">
+          <Key>
+            <PropertyRef Name="FilmID" />
+          </Key>
+          <Property Name="FilmID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FilmTurID" Type="Int32" />
+          <Property Name="Aciklama" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VizyonTarihi" Type="DateTime" Precision="0" />
+          <Property Name="YapimYili" Type="Int32" />
+          <Property Name="YonetmenID" Type="Int32" />
+          <Property Name="DilID" Type="Int32" />
+          <Property Name="UlkeID" Type="Int32" />
+          <Property Name="Picture" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Cast" Relationship="Self.FK__Cast__FilmID__4CA06362" FromRole="Filmler" ToRole="Cast" />
+          <NavigationProperty Name="Dil" Relationship="Self.FK__Filmler__DilID__48CFD27E" FromRole="Filmler" ToRole="Dil" />
+          <NavigationProperty Name="Tur" Relationship="Self.FK__Filmler__FilmTur__46E78A0C" FromRole="Filmler" ToRole="Tur" />
+          <NavigationProperty Name="Ulke" Relationship="Self.FK__Filmler__UlkeID__49C3F6B7" FromRole="Filmler" ToRole="Ulke" />
+          <NavigationProperty Name="Yonetmen" Relationship="Self.FK__Filmler__Yonetme__47DBAE45" FromRole="Filmler" ToRole="Yonetmen" />
+        </EntityType>
+        <EntityType Name="Giris">
+          <Key>
+            <PropertyRef Name="GirisID" />
+          </Key>
+          <Property Name="GirisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Oyuncular">
+          <Key>
+            <PropertyRef Name="OyuncuID" />
+          </Key>
+          <Property Name="OyuncuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UlkeID" Type="Int32" />
+          <Property Name="CinsiyetID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OyuncuAdiSoyadi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cast" Relationship="Self.FK__Cast__OyuncuID__4D94879B" FromRole="Oyuncular" ToRole="Cast" />
+          <NavigationProperty Name="Cinsiyet" Relationship="Self.FK__Oyuncular__Cinsi__412EB0B6" FromRole="Oyuncular" ToRole="Cinsiyet" />
+          <NavigationProperty Name="Ulke" Relationship="Self.FK__Oyuncular__UlkeI__403A8C7D" FromRole="Oyuncular" ToRole="Ulke" />
+        </EntityType>
+        <EntityType Name="Tur">
+          <Key>
+            <PropertyRef Name="TurID" />
+          </Key>
+          <Property Name="TurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tur1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Filmler" Relationship="Self.FK__Filmler__FilmTur__46E78A0C" FromRole="Tur" ToRole="Filmler" />
+        </EntityType>
+        <EntityType Name="Ulke">
+          <Key>
+            <PropertyRef Name="UlkeID" />
+          </Key>
+          <Property Name="UlkeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ulke1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Filmler" Relationship="Self.FK__Filmler__UlkeID__49C3F6B7" FromRole="Ulke" ToRole="Filmler" />
+          <NavigationProperty Name="Oyuncular" Relationship="Self.FK__Oyuncular__UlkeI__403A8C7D" FromRole="Ulke" ToRole="Oyuncular" />
+        </EntityType>
+        <EntityType Name="Yonetmen">
+          <Key>
+            <PropertyRef Name="YonetmenID" />
+          </Key>
+          <Property Name="YonetmenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdiSoyadi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CinsiyetID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cinsiyet" Relationship="Self.FK__Yonetmen__Cinsiy__440B1D61" FromRole="Yonetmen" ToRole="Cinsiyet" />
+          <NavigationProperty Name="Filmler" Relationship="Self.FK__Filmler__Yonetme__47DBAE45" FromRole="Yonetmen" ToRole="Filmler" />
+        </EntityType>
+        <Association Name="FK__Cast__FilmID__4CA06362">
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="0..1" />
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmler">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cast__OyuncuID__4D94879B">
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="0..1" />
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oyuncular">
+              <PropertyRef Name="OyuncuID" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="OyuncuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oyuncular__Cinsi__412EB0B6">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Oyuncular">
+              <PropertyRef Name="CinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Yonetmen__Cinsiy__440B1D61">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="Yonetmen" Type="Self.Yonetmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="CinsiyetID" />
+            </Principal>
+            <Dependent Role="Yonetmen">
+              <PropertyRef Name="CinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__DilID__48CFD27E">
+          <End Role="Dil" Type="Self.Dil" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dil">
+              <PropertyRef Name="DilID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="DilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__FilmTur__46E78A0C">
+          <End Role="Tur" Type="Self.Tur" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tur">
+              <PropertyRef Name="TurID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="FilmTurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__UlkeID__49C3F6B7">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="UlkeID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="UlkeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filmler__Yonetme__47DBAE45">
+          <End Role="Yonetmen" Type="Self.Yonetmen" Multiplicity="0..1" />
+          <End Role="Filmler" Type="Self.Filmler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetmen">
+              <PropertyRef Name="YonetmenID" />
+            </Principal>
+            <Dependent Role="Filmler">
+              <PropertyRef Name="YonetmenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Oyuncular__UlkeI__403A8C7D">
+          <End Role="Ulke" Type="Self.Ulke" Multiplicity="0..1" />
+          <End Role="Oyuncular" Type="Self.Oyuncular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ulke">
+              <PropertyRef Name="UlkeID" />
+            </Principal>
+            <Dependent Role="Oyuncular">
+              <PropertyRef Name="UlkeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FiliFilmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cast" EntityType="Self.Cast" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" />
+          <EntitySet Name="Dil" EntityType="Self.Dil" />
+          <EntitySet Name="Filmler" EntityType="Self.Filmler" />
+          <EntitySet Name="Giris" EntityType="Self.Giris" />
+          <EntitySet Name="Oyuncular" EntityType="Self.Oyuncular" />
+          <EntitySet Name="Tur" EntityType="Self.Tur" />
+          <EntitySet Name="Ulke" EntityType="Self.Ulke" />
+          <EntitySet Name="Yonetmen" EntityType="Self.Yonetmen" />
+          <AssociationSet Name="FK__Cast__FilmID__4CA06362" Association="Self.FK__Cast__FilmID__4CA06362">
+            <End Role="Filmler" EntitySet="Filmler" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cast__OyuncuID__4D94879B" Association="Self.FK__Cast__OyuncuID__4D94879B">
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oyuncular__Cinsi__412EB0B6" Association="Self.FK__Oyuncular__Cinsi__412EB0B6">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Yonetmen__Cinsiy__440B1D61" Association="Self.FK__Yonetmen__Cinsiy__440B1D61">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="Yonetmen" EntitySet="Yonetmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__DilID__48CFD27E" Association="Self.FK__Filmler__DilID__48CFD27E">
+            <End Role="Dil" EntitySet="Dil" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__FilmTur__46E78A0C" Association="Self.FK__Filmler__FilmTur__46E78A0C">
+            <End Role="Tur" EntitySet="Tur" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__UlkeID__49C3F6B7" Association="Self.FK__Filmler__UlkeID__49C3F6B7">
+            <End Role="Ulke" EntitySet="Ulke" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filmler__Yonetme__47DBAE45" Association="Self.FK__Filmler__Yonetme__47DBAE45">
+            <End Role="Yonetmen" EntitySet="Yonetmen" />
+            <End Role="Filmler" EntitySet="Filmler" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Oyuncular__UlkeI__403A8C7D" Association="Self.FK__Oyuncular__UlkeI__403A8C7D">
+            <End Role="Ulke" EntitySet="Ulke" />
+            <End Role="Oyuncular" EntitySet="Oyuncular" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FiliFilmModelStoreContainer" CdmEntityContainer="FiliFilmEntities">
+          <EntitySetMapping Name="Cast">
+            <EntityTypeMapping TypeName="FiliFilmModel.Cast">
+              <MappingFragment StoreEntitySet="Cast">
+                <ScalarProperty Name="CastID" ColumnName="CastID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="OyuncuID" ColumnName="OyuncuID" />
+                <ScalarProperty Name="CastKarakterName" ColumnName="CastKarakterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cinsiyet">
+            <EntityTypeMapping TypeName="FiliFilmModel.Cinsiyet">
+              <MappingFragment StoreEntitySet="Cinsiyet">
+                <ScalarProperty Name="CinsiyetID" ColumnName="CinsiyetID" />
+                <ScalarProperty Name="Cinsiyet1" ColumnName="Cinsiyet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dil">
+            <EntityTypeMapping TypeName="FiliFilmModel.Dil">
+              <MappingFragment StoreEntitySet="Dil">
+                <ScalarProperty Name="DilID" ColumnName="DilID" />
+                <ScalarProperty Name="Dil1" ColumnName="Dil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Filmler">
+            <EntityTypeMapping TypeName="FiliFilmModel.Filmler">
+              <MappingFragment StoreEntitySet="Filmler">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="FilmAdi" ColumnName="FilmAdi" />
+                <ScalarProperty Name="FilmTurID" ColumnName="FilmTurID" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="VizyonTarihi" ColumnName="VizyonTarihi" />
+                <ScalarProperty Name="YapimYili" ColumnName="YapimYili" />
+                <ScalarProperty Name="YonetmenID" ColumnName="YonetmenID" />
+                <ScalarProperty Name="DilID" ColumnName="DilID" />
+                <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Giris">
+            <EntityTypeMapping TypeName="FiliFilmModel.Giris">
+              <MappingFragment StoreEntitySet="Giris">
+                <ScalarProperty Name="GirisID" ColumnName="GirisID" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oyuncular">
+            <EntityTypeMapping TypeName="FiliFilmModel.Oyuncular">
+              <MappingFragment StoreEntitySet="Oyuncular">
+                <ScalarProperty Name="OyuncuID" ColumnName="OyuncuID" />
+                <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+                <ScalarProperty Name="CinsiyetID" ColumnName="CinsiyetID" />
+                <ScalarProperty Name="OyuncuAdiSoyadi" ColumnName="OyuncuAdiSoyadi" />
+                <ScalarProperty Name="DogumTarihi" ColumnName="DogumTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tur">
+            <EntityTypeMapping TypeName="FiliFilmModel.Tur">
+              <MappingFragment StoreEntitySet="Tur">
+                <ScalarProperty Name="TurID" ColumnName="TurID" />
+                <ScalarProperty Name="Tur1" ColumnName="Tur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ulke">
+            <EntityTypeMapping TypeName="FiliFilmModel.Ulke">
+              <MappingFragment StoreEntitySet="Ulke">
+                <ScalarProperty Name="UlkeID" ColumnName="UlkeID" />
+                <ScalarProperty Name="Ulke1" ColumnName="Ulke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yonetmen">
+            <EntityTypeMapping TypeName="FiliFilmModel.Yonetmen">
+              <MappingFragment StoreEntitySet="Yonetmen">
+                <ScalarProperty Name="YonetmenID" ColumnName="YonetmenID" />
+                <ScalarProperty Name="AdiSoyadi" ColumnName="AdiSoyadi" />
+                <ScalarProperty Name="CinsiyetID" ColumnName="CinsiyetID" />
+                <ScalarProperty Name="DogumTarihi" ColumnName="DogumTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
